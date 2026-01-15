@@ -1,117 +1,127 @@
 import streamlit as st
+import json
+import random
 
-# 1. Configurações de Estilo (Fundo Preto Total e Letras Brancas na Resposta)
-st.set_page_config(page_title="Simulado OAB 46 - Damiana", layout="wide")
+# ==========================================
+# 1. MOTOR DE INTELIGÊNCIA DO AGENTE (DATA MINING)
+# ==========================================
+def motor_agente_ia():
+    """
+    Simula o agente que conhece as recorrências da FGV (2021-2026)
+    e as atualizações legislativas mais recentes.
+    """
+    banco_estratégico = [
+        {
+            "area": "Ética (Recorrência: 100%)",
+            "pergunta": "Sobre as prerrogativas do advogado, em caso de prisão em flagrante por motivo ligado ao exercício da profissão, é indispensável:",
+            "opcoes": [
+                "A) A presença de um representante da OAB para lavratura do auto",
+                "B) Apenas a comunicação posterior à seccional da OAB",
+                "C) O acompanhamento de um juiz corregedor"
+            ],
+            "correta": "A)",
+            "explica": "Art. 7, § 3º do Estatuto. É direito do advogado a presença de representante da OAB sob pena de nulidade."
+        },
+        {
+            "area": "Trabalho (Recorrência: Alta)",
+            "pergunta": "No teletrabalho, a alteração do regime presencial para o remoto requer:",
+            "opcoes": [
+                "A) Mútuo acordo e aditivo contratual escrito",
+                "B) Determinação unilateral do empregador com aviso de 48h",
+                "C) Apenas concordância verbal das partes"
+            ],
+            "correta": "A)",
+            "explica": "Art. 75-C, § 1º da CLT. Requer mútuo acordo e registro escrito."
+        },
+        {
+            "area": "Ética (Tendência 2026)",
+            "pergunta": "O uso de inteligência artificial generativa para a redação de peças processuais pelo advogado é:",
+            "opcoes": [
+                "A) Vedado pelo Tribunal de Ética",
+                "B) Permitido, desde que haja supervisão e responsabilidade técnica do profissional",
+                "C) Obrigatório para agilizar a prestação jurisdicional"
+            ],
+            "correta": "B)",
+            "explica": "A tecnologia é ferramenta meio; a responsabilidade final pelo conteúdo é sempre do advogado inscrito."
+        }
+    ]
+    return banco_estratégico
+
+# ==========================================
+# 2. CONFIGURAÇÕES VISUAIS (PADRÃO DAMIANA)
+# ==========================================
+st.set_page_config(page_title="IA-Powered OAB - Damiana", layout="wide")
 
 st.markdown("""
     <style>
-    /* FUNDO TOTAL PRETO ABSOLUTO */
-    .stApp, section[data-testid="stSidebar"], [data-testid="stSidebarContent"] {
-        background-color: #000000 !important;
-    }
-    
-    section[data-testid="stSidebar"] { border-right: none !important; }
-
-    /* EFEITO DE LETRA CONTORNADA (OUTLINE) */
+    .stApp { background-color: #000000 !important; }
     .letra-contornada {
         font-weight: bold;
         text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
         line-height: 1.5;
     }
-
-    /* CORES DAS LETRAS */
     .cor-branca { color: #FFFFFF !important; }
     .cor-dourada { color: #C5A021 !important; } 
     .cor-azul-cintilante { color: #00FFFF !important; }
-
-    /* FONTES E TAMANHOS */
-    .texto-titulo { font-family: 'Arial Black', sans-serif !important; font-size: 24px !important; }
-    .pergunta-estudo { font-family: 'Arial Black', sans-serif !important; font-size: 16px !important; margin-top: 20px; }
-
-    /* ÁREA DE RESPOSTAS EM PRETO */
-    div[role="radiogroup"] { background-color: #000000 !important; padding: 10px !important; }
-
-    /* OPÇÕES EM DOURADO COM CONTORNO */
-    div[role="radiogroup"] label p {
-        color: #C5A021 !important;
-        font-family: 'Arial Black', sans-serif !important;
-        font-size: 14px !important;
-        text-shadow: 2px 2px 0 #000 !important;
-    }
-
-    /* BOTÕES DOURADOS */
-    div.stButton > button {
-        background-color: #C5A021 !important;
-        color: black !important;
-        font-family: 'Arial Black' !important;
-        border: 2px solid #000 !important;
-        width: 100% !important;
-    }
-
-    /* AJUSTE DA LETRA NA RESPOSTA (ONDE ESTAVA O VERDE) */
-    /* Agora a letra será BRANCA, Arial Black e com sombra preta */
-    div[data-testid="stNotification"] p, div[data-testid="stAlert"] p {
-        color: #FFFFFF !important;
-        font-family: 'Arial Black', sans-serif !important;
+    .texto-titulo { font-family: 'Arial Black'; font-size: 26px; }
+    
+    /* REMOÇÃO DE FUNDOS E AJUSTE DE CORES */
+    div[role="radiogroup"] { background-color: #000000 !important; }
+    div[role="radiogroup"] label p { 
+        color: #C5A021 !important; 
+        font-family: 'Arial Black' !important; 
         font-size: 16px !important;
         text-shadow: 2px 2px 0 #000 !important;
     }
-
+    div.stButton > button {
+        background-color: #C5A021; color: black; font-weight: bold; width: 100%; border: 2px solid #000;
+    }
+    div[data-testid="stNotification"], .stAlert {
+        background-color: #000000 !important; border: 1px solid #C5A021 !important;
+    }
+    div[data-testid="stNotification"] p { color: #FFFFFF !important; font-family: 'Arial Black' !important; }
     #MainMenu, footer, header {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
 
-# 2. BANCO DE QUESTÕES (Ética OAB)
-if 'numero_questao' not in st.session_state:
-    st.session_state.numero_questao = 0
-if 'feedback' not in st.session_state:
+# ==========================================
+# 3. LÓGICA DE EXECUÇÃO
+# ==========================================
+if 'banco_de_dados' not in st.session_state:
+    st.session_state.banco_de_dados = motor_agente_ia()
+    st.session_state.indice = 0
     st.session_state.feedback = None
 
-questoes = [
-    {"area": "Ética", "pergunta": "O desagravo público é direito do advogado ofendido no exercício da profissão?", "opcoes": ["A) Sim, é uma prerrogativa", "B) Não, a OAB não faz isso"], "correta": "A)", "explica": "Art. 7, XVII do Estatuto."},
-    {"area": "Ética", "pergunta": "A advocacia admite mercantilização?", "opcoes": ["A) Sim, como qualquer comércio", "B) Não, é expressamente vedado"], "correta": "B)", "explica": "A advocacia é múnus público."},
-    {"area": "Ética", "pergunta": "Qual o prazo prescricional para cobrar honorários?", "opcoes": ["A) 2 anos", "B) 5 anos"], "correta": "B)", "explica": "Art. 25 do Estatuto da OAB."},
-    {"area": "Ética", "pergunta": "Três suspensões podem gerar exclusão?", "opcoes": ["A) Sim", "B) Não"], "correta": "A)", "explica": "Art. 38, I do Estatuto."},
-    {"area": "Ética", "pergunta": "O sigilo profissional é absoluto?", "opcoes": ["A) Sim, sempre", "B) Não, admite exceções"], "correta": "B)", "explica": "O sigilo cede diante de direito à vida."},
-    {"area": "Ética", "pergunta": "A publicidade na advocacia deve ser:", "opcoes": ["A) Persuasiva", "B) Discreta e moderada"], "correta": "B)", "explica": "Art. 39 do Código de Ética."},
-    {"area": "Ética", "pergunta": "O advogado pode recusar causa injusta?", "opcoes": ["A) Sim", "B) Por liberdade de consciência"], "correta": "B)", "explica": "O advogado tem autonomia."},
-    {"area": "Ética", "pergunta": "Estudante de qual ano pode ser estagiário?", "opcoes": ["A) Qualquer ano", "B) Últimos dois anos"], "correta": "B)", "explica": "Art. 9 do Estatuto."},
-    {"area": "Ética", "pergunta": "O TED tem função consultiva?", "opcoes": ["A) Sim, para orientar", "B) Não, apenas julga"], "correta": "A)", "explica": "O TED orienta sobre ética."},
-    {"area": "Ética", "pergunta": "Pode emprestar o nome para leigos?", "opcoes": ["A) Sim", "B) Não, infração grave"], "correta": "B)", "explica": "Exercício exclusivo de advogados."}
-]
-
-# 3. CABEÇALHO
-st.markdown("""
+# Cabeçalho Fixo
+st.markdown(f"""
     <div class="letra-contornada cor-branca texto-titulo">
-        ⚖️ Sistema de Estudos OAB 46<br>
+        ⚖️ Sistema Unificado de IA - OAB 46<br>
         Damiana Rodrigues Dantas<br>
-        <span class="cor-dourada">Direito | Direito Digital | Dev de Agentes IA</span><br>
-        ⚖️ OAB | 🛡️ Harvard CS50 | 〽️ Michigan Python | 🐍 Python<br>
-        <br>
-        🎯 Treino para OAB - FOCO 1ª FASE
+        <span class="cor-dourada">Direito | Dev de Agentes IA</span>
     </div>
     <hr style="border: 1px solid white;">
     """, unsafe_allow_html=True)
 
-# 4. EXIBIÇÃO
-q_atual = questoes[st.session_state.numero_questao]
+# Questão Atual
+banco = st.session_state.banco_de_dados
+q = banco[st.session_state.indice]
 
-st.markdown(f'<p class="letra-contornada pergunta-estudo"><span class="cor-azul-cintilante">Área:</span> <span class="cor-dourada">{q_atual["area"]}</span></p>', unsafe_allow_html=True)
-st.markdown(f'<p class="letra-contornada pergunta-estudo"><span class="cor-azul-cintilante">Questão:</span> <span class="cor-dourada">{q_atual["pergunta"]}</span></p>', unsafe_allow_html=True)
+st.markdown(f'<p class="letra-contornada"><span class="cor-azul-cintilante">Área Recorrente:</span> <span class="cor-dourada">{q["area"]}</span></p>', unsafe_allow_html=True)
+st.markdown(f'<p class="letra-contornada"><span class="cor-azul-cintilante">Questão Hiperatualizada:</span> <span class="cor-dourada">{q["pergunta"]}</span></p>', unsafe_allow_html=True)
 
-escolha = st.radio("", q_atual["opcoes"], label_visibility="collapsed")
+escolha = st.radio("", q["opcoes"], key=f"quest_{st.session_state.indice}", label_visibility="collapsed")
 
 col1, col2 = st.columns(2)
 with col1:
     if st.button("Validar Resposta"):
-        if q_atual["correta"] in escolha:
-            st.session_state.feedback = f"CORRETO! {q_atual['explica']}"
+        if q["correta"] in escolha:
+            st.session_state.feedback = f"✅ CORRETO! {q['explica']}"
         else:
-            st.session_state.feedback = f"INCORRETO. {q_atual['explica']}"
+            st.session_state.feedback = f"❌ INCORRETO. {q['explica']}"
 
 with col2:
-    if st.button("Próxima Questão"):
-        st.session_state.numero_questao = (st.session_state.numero_questao + 1) % len(questoes)
+    if st.button("Próxima Questão (IA)"):
+        st.session_state.indice = (st.session_state.indice + 1) % len(banco)
         st.session_state.feedback = None
         st.rerun()
 
