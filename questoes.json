@@ -1,4 +1,3 @@
-
 [
   {
     "area": "⚖️ Ética Profissional",
@@ -9,9 +8,37 @@
   },
   {
     "area": "💼 Direito do Trabalho",
-    "pergunta": "Horas 'in itinere' ainda existem após a Reforma de 2017?",
+    "pergunta": "Horas 'in itinere' ainda existem?",
     "opcoes": ["A) ✅ Não", "B) ❌ Sim"],
     "correta": "A)",
-    "explica": "Extintas pela Reforma."
+    "explica": "Extintas pela Reforma de 2017."
+  },
+  {
+    "area": "🛡️ Constitucional",
+    "pergunta": "Quem pode propor ADI?",
+    "opcoes": ["A) 📜 Cidadão", "B) 🏛️ Presidente/Mesas/Governadores"],
+    "correta": "B)",
+    "explica": "Art. 103 da CF/88."
+  },
+  {
+    "area": "🏠 Direito Civil",
+    "pergunta": "Qual a idade mínima para casar?",
+    "opcoes": ["A) 🎂 16 anos", "B) 🎂 18 anos"],
+    "correta": "A)",
+    "explica": "Art. 1.517 do Código Civil."
+  },
+  {
+    "area": "⚖️ Ética Profissional",
+    "pergunta": "O advogado pode recusar causa por consciência?",
+    "opcoes": ["A) ✅ Sim", "B) ❌ Não"],
+    "correta": "A)",
+    "explica": "Art. 4º do CED."
+  },
+  {
+    "area": "💼 Direito do Trabalho",
+    "pergunta": "Trabalho intermitente é legal?",
+    "opcoes": ["A) ❌ Não", "B) ✅ Sim"],
+    "correta": "B)",
+    "explica": "Art. 443, § 3º da CLT."
   }
 ]
