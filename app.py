@@ -1,41 +1,54 @@
 import streamlit as st
-import pandas as pd
 
-# Configurações de Identidade e Segurança da Desenvolvedora
-st.set_page_config(page_title="Simulador OAB 46 - Damiana Rodrigues", layout="wide")
+# 1. Configurações Visuais EXCLUSIVAS deste App
+st.set_page_config(page_title="Estudos OAB 46 - Damiana", layout="wide")
 
-# Cabeçalho Personalizado
-st.title("⚖️ Sistema Inteligente de Estudos - OAB 46")
-st.markdown(f"*Desenvolvido por:* Damiana Rodrigues Dantas")
-st.info("Bacharel em Direito (UNIPÊ) | Especialista em Direito Digital | Dev IA & Python")
-
-# Menu Lateral de Navegação
-menu = st.sidebar.selectbox("Escolha o módulo:", ["Cronograma Geral", "Direito do Trabalho", "Simulado IA", "Meus Projetos"])
-
-if menu == "Cronograma Geral":
-    st.header("📅 Plano de Estudo - Reta Final")
-    st.write("Aqui está sua trilha de aprendizagem para os próximos meses.")
-    # Exemplo de lista linear para facilitar a memorização
-    st.markdown("- *Março:* Foco em Ética e Processo do Trabalho")
-    st.markdown("- *Abril:* Revisão de Direito Civil e Constitucional")
-    st.markdown("- *Maio:* Simulados intensivos e Jurisprudência")
-
-elif menu == "Direito do Trabalho":
-    st.header("🛠️ Módulo: Direito do Trabalho")
-    st.write("Selecione o tema para praticar:")
-    tema = st.selectbox("Temas:", ["Jornada de Trabalho", "Verbas Rescisórias", "Estabilidades"])
+st.markdown("""
+    <style>
+    /* Estilo exclusivo do Hub de Estudos OAB */
+    .stApp {
+        background-color: #800020; /* Vinho */
+    }
     
-    if tema == "Verbas Rescisórias":
-        st.warning("Lembrete: Prazo de pagamento é de 10 dias corridos (Art. 477 CLT).")
-        q1 = st.radio("O aviso prévio indenizado integra o tempo de serviço?", ["Sim", "Não"])
-        if st.button("Validar Questão"):
-            if q1 == "Sim":
-                st.success("Correto! Projeção do aviso prévio conforme a CLT.")
-            else:
-                st.error("Resposta incorreta. Revise o Art. 487 da CLT.")
+    h1 {
+        color: #FFFFFF !important;
+    }
 
-elif menu == "Meus Projetos":
-    st.header("🚀 Galeria de Projetos - Damiana")
-    st.write("Projeto em destaque: App de Proteção à Mulher (Integração com Tornozeleiras Eletrônicas)")
-    st.progress(85)
-    st.write("Status: Fase de finalização de código Python.")
+    /* Arial Black 14 para textos menores e labels */
+    .stMarkdown, p, label {
+        color: #FFFFFF !important;
+        font-family: 'Arial Black', sans-serif !important;
+        font-size: 14px !important;
+    }
+
+    /* Caixas de Seleção e Radio em AZUL BEBÊ */
+    .stSelectbox div[data-baseweb="select"], .stRadio div[role="radiogroup"] {
+        background-color: #89CFF0 !important; 
+        border-radius: 5px;
+        padding: 5px;
+    }
+    
+    /* Texto preto dentro do Azul Bebê */
+    .stSelectbox div[data-baseweb="select"] *, .stRadio div[role="radiogroup"] * {
+        color: #000000 !important;
+    }
+
+    section[data-testid="stSidebar"] {
+        background-color: #4D0013 !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+# 2. Identidade da Estudante
+st.title("⚖️ Sistema de Estudos OAB 46")
+st.write("Direito | Direito Digital")
+st.write("🛡️ Harvard CS50 | 〽️ Michigan Python | 🐍 Python")
+
+# 3. Módulos
+menu = st.sidebar.selectbox("Escolha o módulo:", ["Simulado 1ª Fase", "English: Law & Daily"])
+
+if menu == "Simulado 1ª Fase":
+    st.header("🎯 Treino para a Prova")
+    q = st.radio("Questão de Ética: O advogado pode fazer publicidade paga?", ["A) Sim", "B) Não"])
+    if st.button("Validar"):
+        st.write("Resultado em análise...")
