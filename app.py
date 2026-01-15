@@ -1,83 +1,71 @@
 import streamlit as st
 
-# 1. Configurações de Estilo (Vinho Escuro, Azul Bebê e Fontes)
+# Configuração da Página
 st.set_page_config(page_title="Estudos OAB 46 - Damiana", layout="wide")
 
+# CSS FORÇADO (Garante as cores Branca no topo e Preta nas perguntas)
 st.markdown("""
     <style>
-    /* Fundo Vinho Escuro */
-    .stApp, section[data-testid="stSidebar"] {
+    /* 1. FUNDO VINHO ESCURO */
+    .stApp, section[data-testid="stSidebar"], .main {
         background-color: #4D0013 !important;
     }
     
-    /* NOME E TÍTULOS DO TOPO (Brancos e Maiores) */
-    .titulo-topo {
+    /* 2. TÍTULOS E QUALIFICAÇÕES (FORÇAR BRANCO E GRANDE) */
+    .topo-branco {
         color: #FFFFFF !important;
         font-family: 'Arial Black', sans-serif !important;
-        font-size: 24px !important; 
-        font-weight: bold;
-        line-height: 1.2;
-        margin-bottom: 5px;
+        text-align: left;
     }
-    
-    .subtitulo-topo {
-        color: #FFFFFF !important;
-        font-family: 'Arial', sans-serif !important;
-        font-size: 18px !important;
-        line-height: 1.6;
-    }
+    .nome-grande { font-size: 32px !important; margin-bottom: 0px; }
+    .info-branca { font-size: 18px !important; font-family: 'Arial', sans-serif !important; }
 
-    /* SÍMBOLOS (Cores originais e tamanho equilibrado) */
-    .icon {
-        font-size: 24px !important;
-        vertical-align: middle;
-        margin-right: 5px;
-    }
-
-    /* PERGUNTAS E RESPOSTAS (Arial Black 14 - PRETO) */
-    .stMarkdown p, .stSubheader, label, .stRadio p, .stSelectbox label {
+    /* 3. PERGUNTAS E RESPOSTAS (FORÇAR PRETO EM ARIAL BLACK 14) */
+    .stMarkdown p, .stSubheader, label, [data-testid="stWidgetLabel"] p {
         color: #000000 !important;
         font-family: 'Arial Black', sans-serif !important;
         font-size: 14px !important;
     }
 
-    /* Caixas de Pergunta em Azul Bebê */
-    .stSelectbox div[data-baseweb="select"], .stRadio div[role="radiogroup"] {
-        background-color: #89CFF0 !important; 
-        border-radius: 5px;
-        padding: 10px;
+    /* 4. CAIXAS AZUL BEBÊ */
+    div[data-baseweb="select"], div[role="radiogroup"] {
+        background-color: #89CFF0 !important;
+        border-radius: 8px !important;
+        padding: 10px !important;
     }
-    
-    .stSelectbox div[data-baseweb="select"] *, .stRadio div[role="radiogroup"] * {
+
+    /* Garante texto preto dentro das caixas */
+    div[data-baseweb="select"] *, div[role="radiogroup"] * {
         color: #000000 !important;
     }
 
-    /* Botão Dourado */
-    div.stButton > button:first-child {
-        background-color: #C5A021;
-        color: #000000;
-        font-family: 'Arial Black';
-        border-radius: 8px;
+    /* 5. BOTÃO DOURADO */
+    div.stButton > button {
+        background-color: #C5A021 !important;
+        color: #000000 !important;
+        font-family: 'Arial Black' !important;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# 2. Cabeçalho com Nome e Qualificações (Branco e Maior)
+# CABEÇALHO (Usando HTML para garantir a cor branca)
+st.markdown('<h1 class="topo-branco">⚖️ Sistema de Estudos OAB 46</h1>', unsafe_allow_html=True)
 st.markdown(f"""
-    <div class="titulo-topo">⚖️ Sistema de Estudos OAB 46</div>
-    <div class="subtitulo-topo">
-        <b>Damiana Rodrigues Dantas</b><br>
-        Direito | Direito Digital | <b>Dev de Agentes IA</b><br>
-        <span class="icon">⚖️</span> OAB | 
-        <span class="icon">🛡️</span> Harvard CS50 | 
-        <span class="icon">〽️</span> Michigan Python | 
-        <span class="icon">🐍</span> Python
+    <div class="topo-branco">
+        <p class="nome-grande"><b>Damiana Rodrigues Dantas</b></p>
+        <p class="info-branca">Direito | Direito Digital | <b>Dev de Agentes IA</b></p>
+        <p class="info-branca">
+            <span style="font-size:24px">⚖️</span> OAB | 
+            <span style="font-size:24px">🛡️</span> Harvard CS50 | 
+            <span style="font-size:24px">〽️</span> Michigan Python | 
+            <span style="font-size:24px">🐍</span> Python
+        </p>
     </div>
     """, unsafe_allow_html=True)
 
-st.write("---")
+st.divider()
 
-# 3. Menu Lateral e Conteúdo
+# INTERFACE DE ESTUDO
 st.sidebar.title("📚 Roteiro OAB")
 menu = st.sidebar.selectbox("Escolha o módulo:", ["Simulado 1ª Fase", "English Practice"])
 
@@ -90,6 +78,6 @@ if menu == "Simulado 1ª Fase":
     
     if st.button("Validar Resposta"):
         if q.startswith("B"):
-            st.success("Correto! Art. 3º do Estatuto da OAB.")
+            st.success("Correto!")
         else:
-            st.error("Incorreto. A inscrição é indispensável.")
+            st.error("Incorreto.")
