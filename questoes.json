@@ -2,36 +2,106 @@
     {
         "area": "⚖️ Ética",
         "pergunta": "O advogado pode fazer publicidade em rádio ou TV?",
-        "opcoes": ["(A) ✅ Sim, livremente", "(B) ❌ Não, é vedado"],
-        "correta": "(B) ❌ Não, é vedado",
+        "opcoes": ["(A) ✅ Sim", "(B) ❌ Não"],
+        "correta": "(B) ❌ Não",
         "fundamento": "Art. 39 do Código de Ética e Disciplina da OAB."
     },
     {
+        "area": "🛡️ Constitucional",
+        "pergunta": "Qual o quórum necessário para a aprovação de uma Emenda à Constituição (EC)?",
+        "opcoes": ["(A) Maioria absoluta", "(B) 3/5 dos membros em dois turnos"],
+        "correta": "(B) 3/5 dos membros em dois turnos",
+        "fundamento": "Art. 60, § 2º da CRFB/88."
+    },
+    {
         "area": "🔨 Trabalho",
-        "pergunta": "As horas 'in itinere' ainda são computadas na jornada de trabalho após a Reforma Trabalhista?",
+        "pergunta": "As horas 'in itinere' são computadas na jornada após a Reforma?",
         "opcoes": ["(A) ✅ Sim", "(B) ❌ Não"],
         "correta": "(B) ❌ Não",
         "fundamento": "Art. 58, § 2º da CLT."
     },
     {
-        "area": "🛡️ Const.",
-        "pergunta": "Quem tem competência para propor Ação Direta de Inconstitucionalidade (ADI)?",
+        "area": "🏠 Civil",
+        "pergunta": "Aos quantos anos a pessoa adquire a plena capacidade civil?",
+        "opcoes": ["(A) 🎂 16 anos", "(B) 🎂 18 anos"],
+        "correta": "(B) 🎂 18 anos",
+        "fundamento": "Art. 5º do Código Civil."
+    },
+    {
+        "area": "⚖️ Ética",
+        "pergunta": "O advogado pode recusar testemunho por dever de sigilo?",
+        "opcoes": ["(A) ✅ Sim", "(B) ❌ Não"],
+        "correta": "(A) ✅ Sim",
+        "fundamento": "Art. 7º, XIX do Estatuto da OAB."
+    },
+    {
+        "area": "🛡️ Constitucional",
+        "pergunta": "Quem tem competência para propor ADI?",
         "opcoes": ["(A) 📜 Cidadão", "(B) 🏛️ Presidente da República"],
         "correta": "(B) 🏛️ Presidente da República",
         "fundamento": "Art. 103, I da CRFB/88."
     },
     {
-        "area": "🏠 Civil",
-        "pergunta": "Qual a idade mínima para o casamento no Brasil, salvo exceções legais?",
-        "opcoes": ["(A) 🎂 16 anos", "(B) 🎂 18 anos"],
-        "correta": "(A) 🎂 16 anos",
-        "fundamento": "Art. 1.517 do Código Civil."
+        "area": "💼 Administrativo",
+        "pergunta": "A administração pode anular seus próprios atos com vícios?",
+        "opcoes": ["(A) ✅ Sim", "(B) ❌ Não"],
+        "correta": "(A) ✅ Sim",
+        "fundamento": "Súmula 473 do STF."
+    },
+    {
+        "area": "📜 Consumidor",
+        "pergunta": "Qual o prazo de arrependimento para compras fora do estabelecimento?",
+        "opcoes": ["(A) 📅 7 dias", "(B) 📅 30 dias"],
+        "correta": "(A) 📅 7 dias",
+        "fundamento": "Art. 49 do CDC."
     },
     {
         "area": "⚖️ Ética",
-        "pergunta": "O advogado pode recusar o testemunho de fatos que saiba em razão do ofício?",
-        "opcoes": ["(A) ✅ Sim, é dever de sigilo", "(B) ❌ Não, é obrigado"],
-        "correta": "(A) ✅ Sim, é dever de sigilo",
-        "fundamento": "Art. 7º, XIX do Estatuto da OAB."
+        "pergunta": "A sanção de suspensão se aplica em caso de retenção de autos?",
+        "opcoes": ["(A) ✅ Sim", "(B) ❌ Não"],
+        "correta": "(A) ✅ Sim",
+        "fundamento": "Art. 37, I do EAOAB."
+    },
+    {
+        "area": "🏠 Civil",
+        "pergunta": "Qual o prazo para reclamar de vícios aparentes em produtos duráveis?",
+        "opcoes": ["(A) 📅 30 dias", "(B) 📅 90 dias"],
+        "correta": "(B) 📅 90 dias",
+        "fundamento": "Art. 26, II do CDC."
+    },
+    {
+        "area": "⚖️ Ética",
+        "pergunta": "A publicidade do advogado deve ter caráter meramente informativo?",
+        "opcoes": ["(A) ✅ Sim", "(B) ❌ Não"],
+        "correta": "(A) ✅ Sim",
+        "fundamento": "Art. 39 do Código de Ética."
+    },
+    {
+        "area": "🛡️ Constitucional",
+        "pergunta": "O mandato de segurança coletivo pode ser impetrado por partido político com representação no Congresso?",
+        "opcoes": ["(A) ✅ Sim", "(B) ❌ Não"],
+        "correta": "(A) ✅ Sim",
+        "fundamento": "Art. 5º, LXX da CRFB/88."
+    },
+    {
+        "area": "🔨 Trabalho",
+        "pergunta": "O intervalo intrajornada pode ser reduzido para 30 minutos mediante acordo?",
+        "opcoes": ["(A) ✅ Sim", "(B) ❌ Não"],
+        "correta": "(A) ✅ Sim",
+        "fundamento": "Art. 611-A, III da CLT."
+    },
+    {
+        "area": "💼 Administrativo",
+        "pergunta": "Agentes públicos respondem objetivamente por danos causados a terceiros?",
+        "opcoes": ["(A) ✅ Sim", "(B) ❌ Não"],
+        "correta": "(A) ✅ Sim",
+        "fundamento": "Art. 37, § 6º da CRFB/88."
+    },
+    {
+        "area": "⚖️ Ética",
+        "pergunta": "O registro do contrato de honorários na OAB garante título executivo?",
+        "opcoes": ["(A) ✅ Sim", "(B) ❌ Não"],
+        "correta": "(A) ✅ Sim",
+        "fundamento": "Art. 24 do EAOAB."
     }
 ]
