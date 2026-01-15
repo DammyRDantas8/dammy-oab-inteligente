@@ -1,13 +1,13 @@
 import streamlit as st
 
-# 1. Configurações de Estilo (Fundo Azul Marinho e Letras Contornadas)
-st.set_page_config(page_title="Simulado OAB 46 - Damiana", layout="wide")
+# 1. Configurações de Estilo (Fundo Preto Absoluto e Letras Contornadas)
+st.set_page_config(page_title="Foco 1ª Fase OAB - Damiana", layout="wide")
 
 st.markdown("""
     <style>
-    /* FUNDO AZUL MARINHO PROFUNDO */
+    /* FUNDO TOTAL PRETO (Principal e Sidebar) */
     .stApp, section[data-testid="stSidebar"], [data-testid="stSidebarContent"] {
-        background-color: #001F3F !important;
+        background-color: #000000 !important;
     }
     
     section[data-testid="stSidebar"] { border-right: none !important; }
@@ -23,11 +23,11 @@ st.markdown("""
         line-height: 1.5;
     }
 
-    /* CORES ESPECÍFICAS */
+    /* CORES DAS LETRAS */
     .cor-branca { color: #FFFFFF !important; }
-    .cor-dourada { color: #C5A021 !important; } /* Cor do nome 'Questão' e 'Área' */
+    .cor-dourada { color: #C5A021 !important; } 
 
-    /* FONTES */
+    /* FONTES E TAMANHOS */
     .texto-titulo { font-family: 'Arial Black', sans-serif !important; font-size: 24px !important; }
     .pergunta-estudo { font-family: 'Arial Black', sans-serif !important; font-size: 16px !important; margin-top: 20px; }
 
@@ -56,7 +56,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# 2. CABEÇALHO (Letras Brancas com Contorno)
+# 2. CABEÇALHO (Padrão Memorizado com Letras Contornadas)
 st.markdown("""
     <div class="letra-contornada cor-branca texto-titulo">
         ⚖️ Sistema de Estudos OAB 46<br>
@@ -64,34 +64,33 @@ st.markdown("""
         Direito | Direito Digital | Dev de Agentes IA<br>
         ⚖️ OAB | 🛡️ Harvard CS50 | 〽️ Michigan Python | 🐍 Python<br>
         <br>
-        🎯 Treino para OAB
+        🎯 Treino para OAB - FOCO 1ª FASE
     </div>
     <hr style="border: 1px solid white;">
     """, unsafe_allow_html=True)
 
-# 3. CONTEÚDO DE ESTUDO: DIREITO DO TRABALHO
+# 3. MÓDULO DE QUESTÕES
 st.sidebar.markdown('<p class="letra-contornada cor-branca" style="font-family:Arial; font-size:16px;">Módulo:</p>', unsafe_allow_html=True)
-menu = st.sidebar.selectbox("", ["Direito do Trabalho"], label_visibility="collapsed")
+menu = st.sidebar.selectbox("", ["Questões Objetivas"], label_visibility="collapsed")
 
-if menu == "Direito do Trabalho":
-    # DESTAQUE: 'Área' e 'Questão' em DOURADO | Conteúdo em BRANCO
-    st.markdown('<p class="letra-contornada pergunta-estudo"><span class="cor-dourada">Área:</span> <span class="cor-branca">Direito do Trabalho</span></p>', unsafe_allow_html=True)
+if menu == "Questões Objetivas":
+    st.markdown('<p class="letra-contornada pergunta-estudo"><span class="cor-dourada">Área:</span> <span class="cor-branca">Direito do Trabalho (1ª Fase)</span></p>', unsafe_allow_html=True)
     
     st.markdown("""
         <p class="letra-contornada pergunta-estudo">
             <span class="cor-dourada">Questão:</span> 
-            <span class="cor-branca">Sobre o intervalo intrajornada, após a Reforma Trabalhista, é correto afirmar que a não concessão ou concessão parcial implica o pagamento:</span>
+            <span class="cor-branca">Considere que um empregado trabalha em regime de tempo parcial. Após a Reforma Trabalhista, qual a duração máxima semanal permitida para esse regime sem horas suplementares?</span>
         </p>
     """, unsafe_allow_html=True)
     
     q = st.radio("", 
-                ["A) Da integralidade do período de 1 hora, com natureza salarial", 
-                 "B) Apenas do período suprimido, com acréscimo de 50% e natureza indenizatória",
-                 "C) Apenas do período suprimido, com natureza salarial"], 
+                ["A) 25 horas semanais", 
+                 "B) 30 horas semanais",
+                 "C) 32 horas semanais"], 
                 label_visibility="collapsed")
     
     if st.button("Validar Resposta"):
         if "B)" in q:
-            st.success("Correto! Art. 71, § 4º da CLT. A natureza agora é indenizatória e paga-se apenas o tempo suprimido.")
+            st.success("Correto! Art. 58-A da CLT. O regime de tempo parcial pode ser de até 30 horas semanais (sem horas extras) ou 26 horas (com até 6 horas extras).")
         else:
-            st.error("Incorreto. A Reforma de 2017 mudou para natureza indenizatória e apenas sobre o tempo que faltou.")
+            st.error("Incorreto. A Reforma de 2017 ampliou o limite para 30 horas semanais sem horas suplementares.")
