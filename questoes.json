@@ -1,26 +1,42 @@
-[19:24, 15/01/2026] Dammy R Dantas: [
-  {"area": "⚖️ Ética", "pergunta": "O advogado pode fazer publicidade em rádio ou TV?", "opcoes": ["A) ✅ Sim", "B) ❌ Não"], "correta": "B)", "explica": "Art. 39 do CED proíbe."},
-  {"area": "💼 Trabalho", "pergunta": "Horas 'in itinere' ainda existem?", "opcoes": ["A) ✅ Não", "B) ❌ Sim"], "correta": "A)", "explica": "Extintas pela Reforma de 2017."},
-  {"area": "🛡️ Const.", "pergunta": "Quem pode propor ADI?", "opcoes": ["A) 📜 Cidadão", "B) 🏛️ Presidente, Mesas, Governadores"], "correta": "B)", "explica": "Art. 103 da CF."},
-  {"area": "🏠 Civil", "pergunta": "Qual a idade mínima para casar?", "opcoes": ["A) 🎂 16 anos", "B) 🎂 18 anos"], "correta": "A)", "explica": "Art. 1.517 do CC."},
-  {"area": "⚖️ Ética", "pergunta": "Advogado pode recusar testemun…
-[19:29, 15/01/2026] Dammy R Dantas: import json
-import os
-
-# 1. Definir o caminho do seu banco de dados
-CAMINHO_BANCO = 'banco_questoes.json'
-
-# 2. Função para garantir que o arquivo sempre exista com dados
-def inicializar_banco():
-    questoes_iniciais = [
-        {"id": 1, "materia": "Ética", "pergunta": "...", "opcoes": ["A", "B", "C", "D"], "correta": "A"},
-        # Adicione as 100 questões aqui
-    ]
-    
-    # Se o arquivo não existir ou estiver vazio, ele cria um novo com as questões
-    if not os.path.exists(CAMINHO_BANCO) or os.stat(CAMINHO_BANCO).st_size == 0:
-        with open(CAMINHO_BANCO, 'w', encoding='utf-8') as f:
-            json.dump(questoes_iniciais, f, ensure_ascii=False, indent=4)
-
-# 3. Chamar a inicialização antes de carregar o app
-inicializar_banco()
+[
+    {
+        "id": 1,
+        "materia": "Ética Profissional",
+        "pergunta": "O advogado que passa a exercer cargo público incompatível com a advocacia deve requerer:",
+        "opcoes": ["Licenciamento", "Cancelamento da inscrição", "Suspensão preventiva", "Anotação de impedimento"],
+        "correta": "Cancelamento da inscrição",
+        "fundamento": "Art. 11, IV do Estatuto da Advocacia (EAOAB)."
+    },
+    {
+        "id": 2,
+        "materia": "Direito Constitucional",
+        "pergunta": "Qual o quórum necessário para a aprovação de uma Emenda à Constituição (EC)?",
+        "opcoes": ["Maioria simples", "Maioria absoluta", "3/5 dos membros em dois turnos", "2/3 dos membros"],
+        "correta": "3/5 dos membros em dois turnos",
+        "fundamento": "Art. 60, § 2º da CRFB/88."
+    },
+    {
+        "id": 3,
+        "materia": "Direito Civil",
+        "pergunta": "Aos quantos anos a pessoa adquire a plena capacidade civil para os atos da vida comum?",
+        "opcoes": ["16 anos", "18 anos", "21 anos", "14 anos"],
+        "correta": "18 anos",
+        "fundamento": "Art. 5º do Código Civil."
+    },
+    {
+        "id": 4,
+        "materia": "Direito do Trabalho",
+        "pergunta": "Qual o prazo prescricional para o trabalhador pleitear créditos decorrentes da relação de trabalho após a extinção do contrato?",
+        "opcoes": ["1 ano", "2 anos", "5 anos", "10 anos"],
+        "correta": "2 anos",
+        "fundamento": "Art. 7º, XXIX da CRFB/88."
+    },
+    {
+        "id": 5,
+        "materia": "Direito Penal",
+        "pergunta": "Considera-se em estado de necessidade quem pratica o fato para salvar de perigo atual, que não provocou por sua vontade, nem podia de outro modo evitar, direito próprio ou alheio, cujo sacrifício, nas circunstâncias, não era razoável exigir-se.",
+        "opcoes": ["Certo", "Errado"],
+        "correta": "Certo",
+        "fundamento": "Art. 24 do Código Penal."
+    }
+]
