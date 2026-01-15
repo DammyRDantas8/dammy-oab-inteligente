@@ -1,11 +1,11 @@
 import streamlit as st
 
-# 1. Configurações de Estilo (Fundo Preto Absoluto e Letras Contornadas)
+# 1. Configurações de Estilo (Fundo Preto, Azul Cintilante e Dourado)
 st.set_page_config(page_title="Foco 1ª Fase OAB - Damiana", layout="wide")
 
 st.markdown("""
     <style>
-    /* FUNDO TOTAL PRETO (Principal e Sidebar) */
+    /* FUNDO TOTAL PRETO */
     .stApp, section[data-testid="stSidebar"], [data-testid="stSidebarContent"] {
         background-color: #000000 !important;
     }
@@ -26,12 +26,13 @@ st.markdown("""
     /* CORES DAS LETRAS */
     .cor-branca { color: #FFFFFF !important; }
     .cor-dourada { color: #C5A021 !important; } 
+    .cor-azul-cintilante { color: #00FFFF !important; } /* Azul Cintilante / Cyan */
 
     /* FONTES E TAMANHOS */
     .texto-titulo { font-family: 'Arial Black', sans-serif !important; font-size: 24px !important; }
     .pergunta-estudo { font-family: 'Arial Black', sans-serif !important; font-size: 16px !important; margin-top: 20px; }
 
-    /* CAIXAS DE RESPOSTA (Azul Bebê com Texto Preto Arial Black 14) */
+    /* CAIXAS DE RESPOSTA (Azul Bebê com Texto DOURADO Arial Black 14) */
     div[role="radiogroup"] {
         background-color: #89CFF0 !important;
         border-radius: 8px !important;
@@ -39,9 +40,10 @@ st.markdown("""
     }
 
     div[role="radiogroup"] label p {
-        color: #000000 !important;
+        color: #C5A021 !important;
         font-family: 'Arial Black', sans-serif !important;
         font-size: 14px !important;
+        text-shadow: 1px 1px 0 #000 !important;
     }
 
     /* BOTÃO DOURADO */
@@ -56,12 +58,12 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# 2. CABEÇALHO (Padrão Memorizado com Letras Contornadas)
+# 2. CABEÇALHO (Padrão Memorizado)
 st.markdown("""
     <div class="letra-contornada cor-branca texto-titulo">
         ⚖️ Sistema de Estudos OAB 46<br>
         Damiana Rodrigues Dantas<br>
-        Direito | Direito Digital | Dev de Agentes IA<br>
+        <span class="cor-dourada">Direito | Direito Digital | Dev de Agentes IA</span><br>
         ⚖️ OAB | 🛡️ Harvard CS50 | 〽️ Michigan Python | 🐍 Python<br>
         <br>
         🎯 Treino para OAB - FOCO 1ª FASE
@@ -74,23 +76,24 @@ st.sidebar.markdown('<p class="letra-contornada cor-branca" style="font-family:A
 menu = st.sidebar.selectbox("", ["Questões Objetivas"], label_visibility="collapsed")
 
 if menu == "Questões Objetivas":
-    st.markdown('<p class="letra-contornada pergunta-estudo"><span class="cor-dourada">Área:</span> <span class="cor-branca">Direito do Trabalho (1ª Fase)</span></p>', unsafe_allow_html=True)
+    # DESTAQUE: 'Área' e 'Questão' em AZUL CINTILANTE | Conteúdo em DOURADO
+    st.markdown('<p class="letra-contornada pergunta-estudo"><span class="cor-azul-cintilante">Área:</span> <span class="cor-dourada">Direito do Trabalho (1ª Fase)</span></p>', unsafe_allow_html=True)
     
     st.markdown("""
         <p class="letra-contornada pergunta-estudo">
-            <span class="cor-dourada">Questão:</span> 
-            <span class="cor-branca">Considere que um empregado trabalha em regime de tempo parcial. Após a Reforma Trabalhista, qual a duração máxima semanal permitida para esse regime sem horas suplementares?</span>
+            <span class="cor-azul-cintilante">Questão:</span> 
+            <span class="cor-dourada">O empregado que exerce cargo de gestão, como um gerente de agência bancária com amplos poderes de mando, está sujeito ao controle de jornada?</span>
         </p>
     """, unsafe_allow_html=True)
     
     q = st.radio("", 
-                ["A) 25 horas semanais", 
-                 "B) 30 horas semanais",
-                 "C) 32 horas semanais"], 
+                ["A) Sim, deve receber horas extras excedentes à 8ª diária", 
+                 "B) Não, pois está excluído do regime de jornada da CLT",
+                 "C) Apenas se houver acordo escrito para pagamento de horas extras"], 
                 label_visibility="collapsed")
     
     if st.button("Validar Resposta"):
         if "B)" in q:
-            st.success("Correto! Art. 58-A da CLT. O regime de tempo parcial pode ser de até 30 horas semanais (sem horas extras) ou 26 horas (com até 6 horas extras).")
+            st.success("Correto! Art. 62, II da CLT. Os gerentes, assim considerados os exercentes de cargos de gestão, não estão sujeitos ao controle de jornada.")
         else:
-            st.error("Incorreto. A Reforma de 2017 ampliou o limite para 30 horas semanais sem horas suplementares.")
+            st.error("Incorreto. Cargos de confiança/gestão são exceção ao controle de jornada (Art. 62, II).")
