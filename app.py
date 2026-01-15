@@ -1,76 +1,73 @@
 import streamlit as st
 
-# 1. Configuração da Página para manter o fundo escuro
+# 1. Configuração da Página
 st.set_page_config(page_title="Sistema de Estudos OAB 46", layout="wide")
 
-# 2. Injeção de CSS para garantir o fundo preto e cores da foto
+# 2. CSS para fundo PRETO ABSOLUTO e letras DOURADAS
 st.markdown("""
     <style>
-    .main {
-        background-color: #0e1117;
+    /* Fundo Totalmente Preto (Pure Black) */
+    .stApp, [data-testid="stSidebar"], .main, [data-testid="stHeader"] {
+        background-color: #000000 !important;
     }
-    .stApp {
-        background-color: #0e1117;
+    
+    /* Cabeçalho Identidade Visual */
+    .titulo-sistema { color: #FFD700; font-size: 32px !important; font-weight: bold; }
+    .nome-usuario { color: white; font-size: 28px !important; font-weight: bold; }
+    .subtitulo-especialidade { color: #FFD700; font-size: 20px !important; }
+    .certificacoes { color: white; font-size: 18px !important; }
+
+    /* Estilo do Enunciado e Informação da Matéria */
+    .treino-foco { color: white; font-size: 24px !important; font-weight: bold; margin-top: 20px; }
+    .descricao-materia { color: #00BFFF; font-size: 20px !important; font-weight: bold; }
+    .enunciado-dourado { color: #FFD700; font-size: 22px !important; font-weight: bold; margin-bottom: 25px; }
+
+    /* VISIBILIDADE DAS OPÇÕES: Dourado Vibrante, Sem Transparência */
+    div[data-testid="stWidgetLabel"] p, label[data-baseweb="radio"] div {
+        color: #FFD700 !important;
+        font-size: 22px !important;
+        font-weight: 800 !important;
+        opacity: 1 !important;
     }
-    /* Estilo para o texto dourado/amarelo da Damiana */
-    .dourado-text {
-        color: #FFD700;
-        font-family: 'sans-serif';
-    }
-    /* Estilo para a área da questão */
-    .questao-enunciado {
-        color: #FFD700;
+
+    /* Feedback da Resposta (Amarelo Dourado) */
+    .feedback-final {
+        color: #FFD700 !important;
+        font-size: 24px !important;
         font-weight: bold;
-        font-size: 1.1rem;
         margin-top: 20px;
     }
-    /* Estilo personalizado para o feedback da resposta */
-    .feedback-resposta {
-        color: #FFD700;
-        background-color: transparent;
-        font-weight: bold;
-        padding: 10px 0px;
-        font-size: 1.2rem;
+    
+    /* Ajuste para a Sidebar não ficar com divisórias cinzas */
+    [data-testid="stSidebar"] {
+        border-right: 1px solid #333 !important;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# 3. Sidebar (Menu Lateral)
-with st.sidebar:
-    st.write("### Módulo:")
-    st.selectbox("", ["Questões Objetivas"], label_visibility="collapsed")
+# 3. Cabeçalho (Damiana Rodrigues Dantas)
+st.markdown('<div class="titulo-sistema">⚖️ Sistema de Estudos OAB 46</div>', unsafe_allow_html=True)
+st.markdown('<div class="nome-usuario">Damiana Rodrigues Dantas</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitulo-especialidade">Direito | Direito Digital | Dev de Agentes IA</div>', unsafe_allow_html=True)
+st.markdown('<div class="certificacoes">⚖️ OAB | 🛡️ Harvard CS50 | 〽️ Michigan Python | 🐍 Python</div>', unsafe_allow_html=True)
 
-# 4. Cabeçalho Identidade Visual (Exatamente como na foto)
-st.markdown('<h2 class="dourado-text">⚖️ Sistema de Estudos OAB 46</h2>', unsafe_allow_html=True)
-st.markdown('<h3 style="color: white; margin-bottom:0px;">Damiana Rodrigues Dantas</h3>', unsafe_allow_html=True)
-st.markdown('<p class="dourado-text" style="font-size: 1.2rem;">Direito | Direito Digital | Dev de Agentes IA</p>', unsafe_allow_html=True)
-st.markdown('<p style="color: white;">⚖️ OAB | 🛡️ Harvard CS50 | 〽️ Michigan Python | 🐍 Python</p>', unsafe_allow_html=True)
+st.markdown("<hr style='border: 0.5px solid #333;'>", unsafe_allow_html=True)
 
-st.divider()
+# 4. Área da Pergunta
+st.markdown('<div class="treino-foco">🎯 Treino para OAB - FOCO 1ª FASE</div>', unsafe_allow_html=True)
+st.markdown('<div class="descricao-materia">Esta questão é sobre: Direito do Trabalho (1ª Fase)</div>', unsafe_allow_html=True)
 
-# 5. Seção de Treino
-st.markdown('<h3 style="color: white;">🎯 Treino para OAB - FOCO 1ª FASE</h3>', unsafe_allow_html=True)
+st.markdown('<div class="enunciado-dourado">Questão: O empregado que é dispensado sem justa causa tem direito ao saque do FGTS e à indenização compensatória de:</div>', unsafe_allow_html=True)
 
-st.markdown('<p style="color: #00BFFF; font-weight: bold;">Área: Direito do Trabalho (1ª Fase)</p>', unsafe_allow_html=True)
+# 5. Opções com letras douradas grandes
+alternativas = ["A) 20% sobre os depósitos", "B) 40% sobre os depósitos", "C) 50% sobre os depósitos"]
+escolha = st.radio("", alternativas, label_visibility="collapsed")
 
-# 6. Questão
-st.markdown('<p class="questao-enunciado">Questão: O empregado que é dispensado sem justa causa tem direito ao saque do FGTS e à indenização compensatória de:</p>', unsafe_allow_html=True)
-
-alternativa = st.radio(
-    "",
-    ["A) 20% sobre os depósitos", "B) 40% sobre os depósitos", "C) 50% sobre os depósitos"],
-    label_visibility="collapsed"
-)
-
-# Espaço reservado para o resultado não empurrar o layout
-placeholder_resultado = st.empty()
+# Placeholder para o resultado
+resultado_placeholder = st.empty()
 
 if st.button("Validar Resposta"):
-    # Lógica de validação (A alternativa correta é a B)
-    if "B)" in alternativa:
-        placeholder_resultado.markdown('<p class="feedback-resposta">✅ Correto! A indenização é de 40%.</p>', unsafe_allow_html=True)
+    if "B)" in escolha:
+        resultado_placeholder.markdown('<div class="feedback-final">✅ Resposta Correta! A indenização é de 40%.</div>', unsafe_allow_html=True)
     else:
-        placeholder_resultado.markdown('<p class="feedback-resposta">❌ Incorreto. A resposta certa é a B (40%).</p>', unsafe_allow_html=True)
-
-# Rodapé simples
-st.markdown('<div style="position: fixed; bottom: 10px; right: 10px; color: gray;">Gerenciar aplicativo</div>', unsafe_allow_html=True)
+        resultado_placeholder.markdown('<div class="feedback-final">❌ Resposta Incorreta. A alternativa correta é a B.</div>', unsafe_allow_html=True)
