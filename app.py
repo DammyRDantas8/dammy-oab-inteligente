@@ -1,6 +1,6 @@
 import streamlit as st
 
-# 1. Configurações de Estilo (Vinho, Azul Bebê e Fontes)
+# 1. Configurações de Estilo (Vinho Escuro, Azul Bebê e Fontes)
 st.set_page_config(page_title="Estudos OAB 46 - Damiana", layout="wide")
 
 st.markdown("""
@@ -10,23 +10,24 @@ st.markdown("""
         background-color: #4D0013 !important;
     }
     
-    /* NOME E TÍTULOS DO TOPO (Brancos e Maiores - Estilo Título) */
+    /* NOME E TÍTULOS DO TOPO (Brancos e Maiores) */
     .titulo-topo {
         color: #FFFFFF !important;
         font-family: 'Arial Black', sans-serif !important;
-        font-size: 22px !important; /* Tamanho de destaque para o nome */
+        font-size: 24px !important; 
         font-weight: bold;
-        line-height: 1.4;
+        line-height: 1.2;
+        margin-bottom: 5px;
     }
     
     .subtitulo-topo {
         color: #FFFFFF !important;
         font-family: 'Arial', sans-serif !important;
-        font-size: 18px !important; /* Tamanho 18 para as qualificações */
+        font-size: 18px !important;
         line-height: 1.6;
     }
 
-    /* SÍMBOLOS (Tamanho equilibrado) */
+    /* SÍMBOLOS (Cores originais e tamanho equilibrado) */
     .icon {
         font-size: 24px !important;
         vertical-align: middle;
@@ -61,7 +62,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# 2. Cabeçalho com Nome, Símbolos OAB e Qualificações
+# 2. Cabeçalho com Nome e Qualificações (Branco e Maior)
 st.markdown(f"""
     <div class="titulo-topo">⚖️ Sistema de Estudos OAB 46</div>
     <div class="subtitulo-topo">
