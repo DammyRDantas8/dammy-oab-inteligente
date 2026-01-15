@@ -1,70 +1,76 @@
 import streamlit as st
-import json
-import os
 
-# Força o layout e remove o fundo branco indesejado
-st.set_page_config(page_title="Sistema OAB 46", layout="centered")
+# 1. Configuração da Página para manter o fundo escuro
+st.set_page_config(page_title="Sistema de Estudos OAB 46", layout="wide")
 
-# RESTAURAÇÃO COMPLETA DO SEU TEMA ESCURO ORIGINAL
+# 2. Injeção de CSS para garantir o fundo preto e cores da foto
 st.markdown("""
     <style>
+    .main {
+        background-color: #0e1117;
+    }
     .stApp {
         background-color: #0e1117;
-        color: white;
     }
-    .letra-contornada {
-        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-        color: white;
+    /* Estilo para o texto dourado/amarelo da Damiana */
+    .dourado-text {
+        color: #FFD700;
+        font-family: 'sans-serif';
     }
-    .cor-dourada { color: #FFD700; font-weight: bold; }
-    .cor-azul { color: #00BFFF; font-weight: bold; }
+    /* Estilo para a área da questão */
+    .questao-enunciado {
+        color: #FFD700;
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-top: 20px;
+    }
+    /* Estilo personalizado para o feedback da resposta */
+    .feedback-resposta {
+        color: #FFD700;
+        background-color: transparent;
+        font-weight: bold;
+        padding: 10px 0px;
+        font-size: 1.2rem;
+    }
     </style>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
-# Seu cabeçalho exatamente como nas fotos originais
-st.markdown("<h1 class='letra-contornada' style='text-align: center;'>⚖️ Sistema OAB 46 - Automatizado</h1>", unsafe_allow_html=True)
-st.markdown("<h2 class='letra-contornada' style='text-align: center;'>Damiana Rodrigues Dantas</h2>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #FFD700;'>Direito Digital | Dev de Agentes IA</p>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>🎓 OAB | 🛡️ Harvard | 〽️ Michigan | 🐍 Python</p><hr>", unsafe_allow_html=True)
+# 3. Sidebar (Menu Lateral)
+with st.sidebar:
+    st.write("### Módulo:")
+    st.selectbox("", ["Questões Objetivas"], label_visibility="collapsed")
 
-def carregar_questoes():
-    if os.path.exists('questoes.json'):
-        try:
-            with open('questoes.json', 'r', encoding='utf-8') as f:
-                return json.load(f)
-        except: return []
-    return []
+# 4. Cabeçalho Identidade Visual (Exatamente como na foto)
+st.markdown('<h2 class="dourado-text">⚖️ Sistema de Estudos OAB 46</h2>', unsafe_allow_html=True)
+st.markdown('<h3 style="color: white; margin-bottom:0px;">Damiana Rodrigues Dantas</h3>', unsafe_allow_html=True)
+st.markdown('<p class="dourado-text" style="font-size: 1.2rem;">Direito | Direito Digital | Dev de Agentes IA</p>', unsafe_allow_html=True)
+st.markdown('<p style="color: white;">⚖️ OAB | 🛡️ Harvard CS50 | 〽️ Michigan Python | 🐍 Python</p>', unsafe_allow_html=True)
 
-questoes = carregar_questoes()
+st.divider()
 
-if questoes:
-    if 'indice' not in st.session_state: st.session_state.indice = 0
-    if 'respondido' not in st.session_state: st.session_state.respondido = False
+# 5. Seção de Treino
+st.markdown('<h3 style="color: white;">🎯 Treino para OAB - FOCO 1ª FASE</h3>', unsafe_allow_html=True)
 
-    q = questoes[st.session_state.indice]
+st.markdown('<p style="color: #00BFFF; font-weight: bold;">Área: Direito do Trabalho (1ª Fase)</p>', unsafe_allow_html=True)
 
-    # Matéria e Questão com seu estilo visual original
-    st.markdown(f"<p class='letra-contornada'><span class='cor-azul'>🎯 Matéria:</span> <span class='cor-dourada'>{q.get('area', 'Direito')}</span></p>", unsafe_allow_html=True)
-    st.markdown(f"<p class='letra-contornada'><span class='cor-azul'>📝 Questão {st.session_state.indice + 1}/100:</span> <span class='cor-dourada'>{q['pergunta']}</span></p>", unsafe_allow_html=True)
+# 6. Questão
+st.markdown('<p class="questao-enunciado">Questão: O empregado que é dispensado sem justa causa tem direito ao saque do FGTS e à indenização compensatória de:</p>', unsafe_allow_html=True)
 
-    resposta = st.radio("Escolha a opção correta:", q['opcoes'], key=f"q_{st.session_state.indice}")
+alternativa = st.radio(
+    "",
+    ["A) 20% sobre os depósitos", "B) 40% sobre os depósitos", "C) 50% sobre os depósitos"],
+    label_visibility="collapsed"
+)
 
-    if st.button("✅ Validar"):
-        st.session_state.respondido = True
-        if resposta == q['correta']:
-            # ESTA É A ÚNICA MUDANÇA: "CORRETO!" EM VERMELHO E TEXTO EM BRANCO
-            st.markdown(f"""
-                <div style="background-color: #1e3a8a; padding: 15px; border-radius: 10px; border-left: 5px solid red;">
-                    <span style="color: red; font-weight: bold; font-size: 20px;">CORRETO! </span>
-                    <span style="color: white; font-size: 18px;">{q['fundamento']}</span>
-                </div>
-            """, unsafe_allow_html=True)
-        else:
-            st.error(f"❌ INCORRETO! A resposta certa era: {q['correta']}")
+# Espaço reservado para o resultado não empurrar o layout
+placeholder_resultado = st.empty()
 
-    if st.session_state.respondido and st.button("➡️ Próxima"):
-        st.session_state.indice = (st.session_state.indice + 1) % len(questoes)
-        st.session_state.respondido = False
-        st.rerun()
-else:
-    st.error("Por favor, limpe o arquivo 'questoes.json' no GitHub para remover os textos em vermelho.")
+if st.button("Validar Resposta"):
+    # Lógica de validação (A alternativa correta é a B)
+    if "B)" in alternativa:
+        placeholder_resultado.markdown('<p class="feedback-resposta">✅ Correto! A indenização é de 40%.</p>', unsafe_allow_html=True)
+    else:
+        placeholder_resultado.markdown('<p class="feedback-resposta">❌ Incorreto. A resposta certa é a B (40%).</p>', unsafe_allow_html=True)
+
+# Rodapé simples
+st.markdown('<div style="position: fixed; bottom: 10px; right: 10px; color: gray;">Gerenciar aplicativo</div>', unsafe_allow_html=True)
