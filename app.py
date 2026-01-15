@@ -2,21 +2,25 @@ import streamlit as st
 import json
 import os
 
-# Configuração da página para o Sistema OAB 46
-st.set_page_config(page_title="Sistema OAB 46 - Automatizado", layout="centered")
+# Configuração para manter o fundo escuro e o estilo do seu app
+st.set_page_config(page_title="Sistema OAB 46", layout="centered")
 
-# Cabeçalho Personalizado - Damiana Rodrigues Dantas
+# Estilos CSS para manter sua identidade visual (letras contornadas e cores)
 st.markdown("""
-    <div style='text-align: center;'>
-        <h1>⚖️ Sistema OAB 46 - Automatizado</h1>
-        <h3>Damiana Rodrigues Dantas</h3>
-        <p>Direito Digital | Dev de Agentes IA</p>
-        <p>🎓 OAB | 🛡️ Harvard | 〽️ Michigan | 🐍 Python</p>
-        <hr>
-    </div>
+    <style>
+    .main { background-color: #0e1117; color: white; }
+    .letra-contornada { text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
+    .cor-dourada { color: #FFD700; font-weight: bold; }
+    .cor-azul { color: #00BFFF; font-weight: bold; }
+    </style>
 """, unsafe_allow_html=True)
 
-# Função para carregar as questões do arquivo JSON
+# Cabeçalho Original
+st.markdown("<h1 class='letra-contornada' style='text-align: center;'>⚖️ Sistema OAB 46 - Automatizado</h1>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center;'>Damiana Rodrigues Dantas</h2>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>Direito Digital | Dev de Agentes IA</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>🎓 OAB | 🛡️ Harvard | 〽️ Michigan | 🐍 Python</p><hr>", unsafe_allow_html=True)
+
 def carregar_questoes():
     if os.path.exists('questoes.json'):
         with open('questoes.json', 'r', encoding='utf-8') as f:
@@ -25,43 +29,34 @@ def carregar_questoes():
 
 questoes = carregar_questoes()
 
-if not questoes:
-    st.error("Erro: O arquivo 'questoes.json' não foi encontrado ou está vazio.")
-else:
-    # Inicialização do estado da sessão
-    if 'indice' not in st.session_state:
-        st.session_state.indice = 0
-    if 'respondido' not in st.session_state:
-        st.session_state.respondido = False
+if questoes:
+    if 'indice' not in st.session_state: st.session_state.indice = 0
+    if 'respondido' not in st.session_state: st.session_state.respondido = False
 
     q = questoes[st.session_state.indice]
 
-    # Exibição da Matéria e Pergunta
-    st.markdown(f"🎯 *Matéria:* {q['area']}")
-    st.markdown(f"📝 *Questão {st.session_state.indice + 1}/100:* {q['pergunta']}")
+    # Exibição com suas classes de cores originais
+    st.markdown(f"<p class='letra-contornada'><span class='cor-azul'>🎯 Matéria:</span> <span class='cor-dourada'>{q['area']}</span></p>", unsafe_allow_html=True)
+    st.markdown(f"<p class='letra-contornada'><span class='cor-azul'>📝 Questão {st.session_state.indice + 1}/100:</span> <span class='cor-dourada'>{q['pergunta']}</span></p>", unsafe_allow_html=True)
 
-    # Opções de resposta
     resposta = st.radio("Escolha a opção correta:", q['opcoes'], key=f"q_{st.session_state.indice}")
 
     if st.button("✅ Validar"):
         st.session_state.respondido = True
         if resposta == q['correta']:
-            # APLICAÇÃO DAS CORES: CORRETO EM VERMELHO E RESPOSTA EM BRANCO
+            # AQUI ESTÁ A CORREÇÃO DAS CORES QUE VOCÊ PEDIU:
             st.markdown(f"""
-                <div style="background-color: #1e3a8a; padding: 15px; border-radius: 10px; border-left: 5px solid red;">
-                    <span style="color: red; font-weight: bold; font-size: 18px;">CORRETO! </span>
-                    <span style="color: white; font-size: 16px;">{q['fundamento']}</span>
+                <div style="background-color: #1e3a8a; padding: 15px; border-radius: 10px;">
+                    <span style="color: red; font-weight: bold; font-size: 20px;">CORRETO! </span>
+                    <span style="color: white; font-size: 18px;">{q['fundamento']}</span>
                 </div>
             """, unsafe_allow_html=True)
         else:
             st.error(f"❌ INCORRETO! A resposta certa era: {q['correta']}")
 
-    # Botão para próxima questão
-    if st.session_state.respondido:
-        if st.button("➡️ Próxima"):
-            if st.session_state.indice < len(questoes) - 1:
-                st.session_state.indice += 1
-                st.session_state.respondido = False
-                st.rerun()
-            else:
-                st.success("🎉 Parabéns! Você concluiu o simulado de 100 questões para a OAB 46!")
+    if st.session_state.respondido and st.button("➡️ Próxima"):
+        st.session_state.indice = (st.session_state.indice + 1) % len(questoes)
+        st.session_state.respondido = False
+        st.rerun()
+else:
+    st.warning("Verifique se o arquivo 'questoes.json' está preenchido corretamente no GitHub.")
