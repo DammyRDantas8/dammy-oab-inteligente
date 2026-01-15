@@ -1,0 +1,17 @@
+
+[
+  {
+    "area": "⚖️ Ética Profissional",
+    "pergunta": "O advogado pode fazer publicidade em rádio ou TV?",
+    "opcoes": ["A) ✅ Sim", "B) ❌ Não"],
+    "correta": "B)",
+    "explica": "Art. 39 do CED proíbe."
+  },
+  {
+    "area": "💼 Direito do Trabalho",
+    "pergunta": "Horas 'in itinere' ainda existem após a Reforma de 2017?",
+    "opcoes": ["A) ✅ Não", "B) ❌ Sim"],
+    "correta": "A)",
+    "explica": "Extintas pela Reforma."
+  }
+]
