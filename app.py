@@ -1,4 +1,4 @@
-[21:03, 15/01/2026] Dammy R Dantas: import streamlit as st
+ import streamlit as st
 
 # 1. Configuração da Página
 st.set_page_config(page_title="Sistema de Estudos OAB 46", layout="wide")
